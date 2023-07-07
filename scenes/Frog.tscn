@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw64bi4h4q7br"]
+
+[ext_resource type="Script" path="res://scripts/Frog.gd" id="1_0y3sx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuxjo"]
+size = Vector2(40, 40)
+
+[node name="Frog" type="RigidBody2D"]
+position = Vector2(197, 430)
+max_contacts_reported = 1
+contact_monitor = true
+lock_rotation = true
+script = ExtResource("1_0y3sx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.611765, 0.760784, 0.368627, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_fuxjo")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")
+bias = 0.9
+disable_collision = false
+softness = 0.8
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
