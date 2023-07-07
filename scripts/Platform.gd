@@ -9,9 +9,12 @@ var mouse_inside := false
 var pos_diff := 0.0
 
 func _input(event: InputEvent) -> void:
-  if event is InputEventMouseButton && mouse_inside:
-    dragged = event.is_pressed()
-    pos_diff = get_viewport().get_mouse_position().x - global_position.x
+  if event is InputEventMouseButton:
+    if event.is_pressed() && mouse_inside:
+      dragged = true
+      pos_diff = get_viewport().get_mouse_position().x - global_position.x
+    elif dragged && !event.is_pressed():
+      dragged = false
 
 func _process(_delta: float) -> void:
   if dragged:

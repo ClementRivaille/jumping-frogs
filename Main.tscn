@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=6 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="PackedScene" uid="uid://crje4f4x3w0f0" path="res://scenes/Platform.tscn" id="2_gr0qy"]
+[ext_resource type="PackedScene" uid="uid://d3uan07s2wxat" path="res://scenes/Fly.tscn" id="3_gyo8n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
 rough = true
@@ -14,6 +15,7 @@ b = Vector2(0, 498)
 
 [node name="Frog" parent="." instance=ExtResource("1_dn6oc")]
 position = Vector2(47, 458)
+collision_layer = 2
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
 
@@ -33,3 +35,26 @@ physics_material_override = SubResource("PhysicsMaterial_4owon")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
 shape = SubResource("SegmentShape2D_ql2dt")
 metadata/_edit_lock_ = true
+
+[node name="FliesSpawner" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Fly" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly2" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly3" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly4" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly5" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly6" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly7" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly8" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly9" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="Fly10" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]

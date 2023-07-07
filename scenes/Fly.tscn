@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3uan07s2wxat"]
+
+[ext_resource type="Script" path="res://scripts/Fly.gd" id="1_6fgp6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ut7dh"]
+radius = 12.6491
+
+[node name="Fly" type="CharacterBody2D"]
+collision_layer = 6
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_6fgp6")
+speed = 200.0
+max_y = 250.0
+max_x = 1150.0
+padding = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ut7dh")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 9.0
+offset_bottom = 11.0
+color = Color(0.0235294, 0.211765, 0.294118, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="debugRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 6.0
+offset_bottom = 5.0
+color = Color(0.831373, 0.607843, 0, 1)
+
+[connection signal="timeout" from="Timer" to="." method="pick_destination"]
