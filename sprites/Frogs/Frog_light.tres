@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c7dmk7itbm2d6"]
+
+[ext_resource type="Texture2D" uid="uid://b3nqgf77w63ca" path="res://sprites/Frogs/frog-jumping_light-green.png" id="1_wdxeq"]
+[ext_resource type="Texture2D" uid="uid://cl85oio4tg7bb" path="res://sprites/Frogs/frog-sitting_light-green.png" id="2_y10u0"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wdxeq")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_y10u0")
+}],
+"loop": true,
+"name": &"still",
+"speed": 5.0
+}]

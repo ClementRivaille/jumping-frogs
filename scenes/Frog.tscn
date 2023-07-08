@@ -1,30 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cw64bi4h4q7br"]
+[gd_scene load_steps=4 format=3 uid="uid://cw64bi4h4q7br"]
 
 [ext_resource type="Script" path="res://scripts/Frog.gd" id="1_0y3sx"]
-[ext_resource type="Texture2D" uid="uid://b3nqgf77w63ca" path="res://sprites/Frogs/frog-jumping_light-green.png" id="2_utk0r"]
-[ext_resource type="Texture2D" uid="uid://cl85oio4tg7bb" path="res://sprites/Frogs/frog-sitting_light-green.png" id="3_atawm"]
+[ext_resource type="SpriteFrames" uid="uid://c7dmk7itbm2d6" path="res://sprites/Frogs/Frog_light.tres" id="2_ggf6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuxjo"]
 size = Vector2(61, 30)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6gunv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_utk0r")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_atawm")
-}],
-"loop": true,
-"name": &"still",
-"speed": 5.0
-}]
 
 [node name="Frog" type="RigidBody2D"]
 collision_layer = 2
@@ -47,7 +27,7 @@ softness = 0.8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
-sprite_frames = SubResource("SpriteFrames_6gunv")
+sprite_frames = ExtResource("2_ggf6p")
 animation = &"jump"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,7 +2,7 @@ extends Node2D
 class_name GameStore
 
 @export var score_goal = 20
-@export var max_level = 3
+@export var max_level = 4
 
 var level = 0
 var score = 0
@@ -35,12 +35,13 @@ func level_success():
     level_up.emit()
 
 func level_fail():
-  level = maxi(0, level - 1)
-  level_updated.emit(level)
-  level_down.emit()
-  if level == 0:
+  level = level - 1
+  if level < 0:
     game_running = false
     game_over.emit()
+    level = 0
+  level_updated.emit(level)
+  level_down.emit()
     
 func start_game():
   game_running = true

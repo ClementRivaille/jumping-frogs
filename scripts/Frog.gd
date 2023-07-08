@@ -3,6 +3,7 @@ class_name Frog
 
 @export var VFORCE = 1000.0
 @export var MAX_HFORCE = 400.0
+@export var frames: SpriteFrames
 
 var beats_scores: Array[Array] = [
   [1],
@@ -18,16 +19,20 @@ var reset_position_to := -1.0
 var in_air := true
 var scheduled_jump_on := 1
 
+func _ready() -> void:
+  sprite.sprite_frames = frames
+
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   if reset_position_to > -1.0:
     state.transform.origin = Vector2(reset_position_to, state.transform.origin.y)
     reset_position_to = -1.0
+    apply_central_impulse(Vector2(0, -1000.0))
     
   if absf(state.linear_velocity.x) > MAX_HFORCE && in_air:
     state.linear_velocity = state.linear_velocity.normalized() * MAX_HFORCE
     state.linear_velocity.y = -VFORCE
     
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
   if in_air:
     sprite.flip_h = linear_velocity.x < 0.0
 
@@ -36,7 +41,6 @@ func jump():
   apply_central_impulse(Vector2(randf_range(-MAX_HFORCE, MAX_HFORCE), -VFORCE))
   sprite.animation = "jump"
   in_air = true
-
 
 func _on_body_entered(body: Node) -> void:
   if body is Platform:
@@ -50,9 +54,8 @@ func _on_body_entered(body: Node) -> void:
     fly.on_catch()
     
 func enter_game(xpos: float):
-  freeze = false
+  set_deferred("freeze", false)
   reset_position_to = xpos
-  apply_central_impulse(Vector2(0, -1000.0))
   
 func schedule_jump():
   var scores: Array = beats_scores[mini(store.level, beats_scores.size() - 1)]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=17 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="Texture2D" uid="uid://5c0l532o3sgv" path="res://sprites/4K-textured-bg.jpg" id="1_jsexm"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://scripts/FrogManager.gd" id="5_3wxj7"]
 [ext_resource type="PackedScene" uid="uid://0h3vfey740nl" path="res://scenes/StartScreen.tscn" id="5_o8sl8"]
 [ext_resource type="PackedScene" uid="uid://jisv04je2hpd" path="res://scenes/Music.tscn" id="9_ylqg5"]
+[ext_resource type="SpriteFrames" uid="uid://c7dmk7itbm2d6" path="res://sprites/Frogs/Frog_light.tres" id="10_b7bll"]
+[ext_resource type="SpriteFrames" uid="uid://rf2yipwu4htq" path="res://sprites/Frogs/Frog_forest.tres" id="11_p2gu2"]
+[ext_resource type="SpriteFrames" uid="uid://brsyp0p1k7yai" path="res://sprites/Frogs/Frog_brown.tres" id="12_wc38j"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
 rough = true
@@ -91,9 +94,24 @@ shape = SubResource("RectangleShape2D_0fyud")
 z_index = 1
 position = Vector2(331, -16.12)
 VFORCE = 850.0
+frames = ExtResource("10_b7bll")
+
+[node name="Frog2" parent="FrogManager/Frogs" instance=ExtResource("1_dn6oc")]
+z_index = 1
+position = Vector2(493, -20.12)
+VFORCE = 850.0
+frames = ExtResource("11_p2gu2")
+
+[node name="Frog3" parent="FrogManager/Frogs" instance=ExtResource("1_dn6oc")]
+z_index = 1
+position = Vector2(705, -21.12)
+VFORCE = 850.0
+frames = ExtResource("12_wc38j")
 
 [node name="Music" parent="." instance=ExtResource("9_ylqg5")]
 
 [connection signal="timeout" from="FliesSpawner/Timer" to="FliesSpawner" method="_on_timer_timeout"]
 [connection signal="body_entered" from="FrogManager/Area2D" to="FrogManager" method="on_frog_fall"]
 [connection signal="beat" from="Music" to="FrogManager/Frogs/Frog" method="on_beat"]
+[connection signal="beat" from="Music" to="FrogManager/Frogs/Frog2" method="on_beat"]
+[connection signal="beat" from="Music" to="FrogManager/Frogs/Frog3" method="on_beat"]

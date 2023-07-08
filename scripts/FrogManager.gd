@@ -10,7 +10,7 @@ var platforms: Array[Platform] = []
 
 func _ready() -> void:
   for c in $Frogs.get_children():
-    frogs.push_front(c)
+    frogs.append(c)
   for p in get_tree().get_nodes_in_group("platform"):
     platforms.append(p)
     
