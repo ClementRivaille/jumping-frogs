@@ -4,17 +4,20 @@ class_name Frog
 @export var VFORCE = 1000.0
 @export var MAX_HFORCE = 400.0
 
+var beats_scores: Array[Array] = [
+  [1],
+  [1,1,2,3],
+  [1,2,3]
+]
+
 @onready var joint: PinJoint2D = $PinJoint2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var store: GameStore = Store
 
 var reset_position_to := -1.0
 var in_air := true
+var scheduled_jump_on := 1
 
-func _input(event: InputEvent) -> void:
-  if event.is_action_pressed("ui_accept"):
-    jump()
-    
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   if reset_position_to > -1.0:
     state.transform.origin = Vector2(reset_position_to, state.transform.origin.y)
@@ -36,6 +39,7 @@ func _on_body_entered(body: Node) -> void:
     joint.node_b = body.get_path()
     in_air = false
     sprite.animation = "still"
+    schedule_jump()
   if body is Fly:
     store.catch_fly()
     var fly: Fly = body
@@ -45,3 +49,12 @@ func enter_game(xpos: float):
   freeze = false
   reset_position_to = xpos
   apply_central_impulse(Vector2(0, -1000.0))
+  
+func schedule_jump():
+  var scores: Array = beats_scores[mini(store.level, beats_scores.size() - 1)]
+  scheduled_jump_on = scores.pick_random()
+  
+func on_beat(beat: int):
+  if !freeze && !in_air:
+    if beat == scheduled_jump_on:
+      jump()

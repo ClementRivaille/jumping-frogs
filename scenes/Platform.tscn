@@ -13,8 +13,8 @@ size = Vector2(215.9, 8)
 [node name="Platform" type="StaticBody2D" groups=["platform"]]
 physics_material_override = SubResource("PhysicsMaterial_yirm3")
 script = ExtResource("1_sjh0r")
-min_pos = 175.0
-max_pos = 980.0
+min_pos = 115.0
+max_pos = 1040.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.15)

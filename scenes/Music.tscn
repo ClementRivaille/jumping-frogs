@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://jisv04je2hpd"]
+
+[ext_resource type="Script" path="res://addons/meta_player/meta_player.gd" id="1_5ujk8"]
+[ext_resource type="Script" path="res://scripts/Music.gd" id="1_wo6kl"]
+[ext_resource type="AudioStream" uid="uid://bheqelnwlu8n5" path="res://music/test/piano.ogg" id="2_drh2w"]
+[ext_resource type="Script" path="res://addons/meta_player/range_fade.gd" id="3_slmuh"]
+[ext_resource type="AudioStream" uid="uid://crskddkweu33n" path="res://music/test/marimba.ogg" id="4_yvvmk"]
+[ext_resource type="AudioStream" uid="uid://bk24im3ssul0o" path="res://music/test/guitar.ogg" id="6_yarwt"]
+[ext_resource type="AudioStream" uid="uid://bkpbpgah7bxf8" path="res://music/test/strings.ogg" id="7_2vg1p"]
+
+[sub_resource type="Resource" id="Resource_vpcqp"]
+script = ExtResource("3_slmuh")
+val_min = 0.0
+val_max = 1.0
+invert = false
+
+[sub_resource type="Resource" id="Resource_svxe7"]
+script = ExtResource("3_slmuh")
+val_min = 1.0
+val_max = 2.0
+invert = false
+
+[sub_resource type="Resource" id="Resource_0lplv"]
+script = ExtResource("3_slmuh")
+val_min = 2.0
+val_max = 3.0
+invert = false
+
+[node name="Music" type="Node2D"]
+script = ExtResource("1_wo6kl")
+
+[node name="MetaPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_drh2w")
+script = ExtResource("1_5ujk8")
+tempo = 108
+
+[node name="layer1" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
+stream = ExtResource("4_yvvmk")
+script = ExtResource("1_5ujk8")
+automate_volume = true
+target = NodePath("../..")
+target_param = "layer"
+automation_rule = SubResource("Resource_vpcqp")
+seek_up_weight = 0.2
+
+[node name="layer2" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
+stream = ExtResource("6_yarwt")
+script = ExtResource("1_5ujk8")
+automate_volume = true
+target = NodePath("../..")
+target_param = "layer"
+automation_rule = SubResource("Resource_svxe7")
+seek_up_weight = 0.4
+
+[node name="layer3" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
+stream = ExtResource("7_2vg1p")
+script = ExtResource("1_5ujk8")
+automate_volume = true
+target = NodePath("../..")
+target_param = "layer"
+automation_rule = SubResource("Resource_0lplv")
+seek_up_weight = 0.4

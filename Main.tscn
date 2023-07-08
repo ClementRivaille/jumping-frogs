@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=13 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="PackedScene" uid="uid://crje4f4x3w0f0" path="res://scenes/Platform.tscn" id="2_gr0qy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bgja3y0mfnuqr" path="res://scenes/Debug.tscn" id="4_lix75"]
 [ext_resource type="Script" path="res://scripts/FrogManager.gd" id="5_3wxj7"]
 [ext_resource type="PackedScene" uid="uid://0h3vfey740nl" path="res://scenes/StartScreen.tscn" id="5_o8sl8"]
+[ext_resource type="PackedScene" uid="uid://jisv04je2hpd" path="res://scenes/Music.tscn" id="9_ylqg5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
 rough = true
@@ -90,5 +91,8 @@ z_index = 1
 position = Vector2(331, -16.12)
 VFORCE = 850.0
 
+[node name="Music" parent="." instance=ExtResource("9_ylqg5")]
+
 [connection signal="timeout" from="FliesSpawner/Timer" to="FliesSpawner" method="_on_timer_timeout"]
 [connection signal="body_entered" from="FrogManager/Area2D" to="FrogManager" method="on_frog_fall"]
+[connection signal="beat" from="Music" to="FrogManager/Frogs/Frog" method="on_beat"]

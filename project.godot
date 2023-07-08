@@ -13,15 +13,20 @@ config_version=5
 config/name="Frogs Jump"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://sprites/Frogs/frog-sitting_light-green.png"
 
 [autoload]
 
 Store="*res://scenes/Store.tscn"
+NoteValue="*res://addons/SimpleSampler/note_value.gd"
 
 [display]
 
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SimpleSampler/plugin.cfg", "res://addons/meta_player/plugin.cfg")
 
 [input]
 
