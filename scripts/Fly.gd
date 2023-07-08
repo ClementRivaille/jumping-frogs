@@ -15,6 +15,8 @@ var destination: Vector2
 var close := 2
 var fly_speed = 50.0
 
+signal catched
+
 func _ready() -> void:
   pick_destination()
 
@@ -31,3 +33,7 @@ func _process(delta: float) -> void:
   velocity = position.direction_to(destination) * fly_speed
   debug.global_position = destination
   move_and_slide()
+
+func on_catch():
+  catched.emit()
+  queue_free()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=7 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="PackedScene" uid="uid://crje4f4x3w0f0" path="res://scenes/Platform.tscn" id="2_gr0qy"]
 [ext_resource type="PackedScene" uid="uid://d3uan07s2wxat" path="res://scenes/Fly.tscn" id="3_gyo8n"]
+[ext_resource type="PackedScene" uid="uid://bgja3y0mfnuqr" path="res://scenes/Debug.tscn" id="4_lix75"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
 rough = true
@@ -14,10 +15,18 @@ b = Vector2(0, 498)
 [node name="Main" type="Node2D"]
 
 [node name="Frog" parent="." instance=ExtResource("1_dn6oc")]
+z_index = 1
 position = Vector2(47, 458)
 collision_layer = 2
+VFORCE = 850.0
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
+
+[node name="Platform2" parent="." instance=ExtResource("2_gr0qy")]
+position = Vector2(250, 381)
+
+[node name="Platform3" parent="." instance=ExtResource("2_gr0qy")]
+position = Vector2(547, 573)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -58,3 +67,9 @@ metadata/_edit_lock_ = true
 [node name="Fly9" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
 
 [node name="Fly10" parent="FliesSpawner" instance=ExtResource("3_gyo8n")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="Debug" parent="UI" instance=ExtResource("4_lix75")]
