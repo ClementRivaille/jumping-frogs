@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jisv04je2hpd"]
+[gd_scene load_steps=41 format=3 uid="uid://jisv04je2hpd"]
 
 [ext_resource type="Script" path="res://addons/meta_player/meta_player.gd" id="1_5ujk8"]
 [ext_resource type="Script" path="res://scripts/Music.gd" id="1_wo6kl"]
@@ -7,6 +7,22 @@
 [ext_resource type="AudioStream" uid="uid://crskddkweu33n" path="res://music/test/marimba.ogg" id="4_yvvmk"]
 [ext_resource type="AudioStream" uid="uid://bk24im3ssul0o" path="res://music/test/guitar.ogg" id="6_yarwt"]
 [ext_resource type="AudioStream" uid="uid://bkpbpgah7bxf8" path="res://music/test/strings.ogg" id="7_2vg1p"]
+[ext_resource type="Script" path="res://addons/SimpleSampler/sampler_instrument.gd" id="8_e4pfa"]
+[ext_resource type="Script" path="res://addons/SimpleSampler/sample_resource.gd" id="9_kgpvw"]
+[ext_resource type="AudioStream" uid="uid://bxj0vn1ucru2x" path="res://sound/accordion/Accordion127_a#0.wav" id="10_ljjfm"]
+[ext_resource type="AudioStream" uid="uid://bn4ikmyqhdeg5" path="res://sound/accordion/Accordion127_c1.wav" id="11_srlmu"]
+[ext_resource type="AudioStream" uid="uid://d2n1b1ddrmpnn" path="res://sound/accordion/Accordion127_c2.wav" id="12_ytwa7"]
+[ext_resource type="AudioStream" uid="uid://c0fbse35w48s8" path="res://sound/accordion/Accordion127_c3.wav" id="13_gadnj"]
+[ext_resource type="AudioStream" uid="uid://durdvvhbctel4" path="res://sound/accordion/Accordion127_d#1.wav" id="14_em7x6"]
+[ext_resource type="AudioStream" uid="uid://3f5qu8aqulyw" path="res://sound/accordion/Accordion127_d#2.wav" id="15_actp5"]
+[ext_resource type="AudioStream" uid="uid://bhv4x54jhhpns" path="res://sound/accordion/Accordion127_d#3.wav" id="16_steeg"]
+[ext_resource type="AudioStream" uid="uid://drsndhhobxq1s" path="res://sound/accordion/Accordion127_f1.wav" id="17_ji8qf"]
+[ext_resource type="AudioStream" uid="uid://hlfbhhwqwium" path="res://sound/accordion/Accordion127_f2.wav" id="18_uw34u"]
+[ext_resource type="AudioStream" uid="uid://dmxlxyhymna5v" path="res://sound/accordion/Accordion127_f3.wav" id="19_xyhkf"]
+[ext_resource type="AudioStream" uid="uid://ninoo2lt1sqg" path="res://sound/accordion/Accordion127_g0.wav" id="20_geig2"]
+[ext_resource type="AudioStream" uid="uid://b4uir1kfncpki" path="res://sound/accordion/Accordion127_g1.wav" id="21_x8h1u"]
+[ext_resource type="AudioStream" uid="uid://fgif6mlei4mj" path="res://sound/accordion/Accordion127_g2.wav" id="22_vdwl5"]
+[ext_resource type="AudioStream" uid="uid://diet2il38sajp" path="res://sound/accordion/Accordion127_g3.wav" id="23_7gxxk"]
 
 [sub_resource type="Resource" id="Resource_vpcqp"]
 script = ExtResource("3_slmuh")
@@ -26,9 +42,107 @@ val_min = 2.0
 val_max = 3.0
 invert = false
 
+[sub_resource type="Resource" id="Resource_6k6yr"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("10_ljjfm")
+tone = "A#"
+octave = 0
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_qj28j"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("11_srlmu")
+tone = "C"
+octave = 1
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_gisok"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("12_ytwa7")
+tone = "C"
+octave = 2
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_pupq1"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("13_gadnj")
+tone = "C"
+octave = 3
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_tl1lk"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("14_em7x6")
+tone = "D#"
+octave = 1
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_k7wff"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("15_actp5")
+tone = "D#"
+octave = 2
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_6s58s"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("16_steeg")
+tone = "D#"
+octave = 3
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_oxrty"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("17_ji8qf")
+tone = "F"
+octave = 1
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_glcgw"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("18_uw34u")
+tone = "F"
+octave = 2
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_py6m8"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("19_xyhkf")
+tone = "F"
+octave = 3
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_0icju"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("20_geig2")
+tone = "G"
+octave = 0
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_0yy3i"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("21_x8h1u")
+tone = "G"
+octave = 1
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_t3dip"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("22_vdwl5")
+tone = "G"
+octave = 2
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_x6pvo"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("23_7gxxk")
+tone = "G"
+octave = 3
+velocity = 5
+
 [node name="Music" type="Node2D"]
 script = ExtResource("1_wo6kl")
-scale_notes = Array[String](["D", "E", "G", "A", "B", "C"])
+scale_notes = Array[String](["G", "A", "B", "D", "E", "F#"])
 
 [node name="MetaPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_drh2w")
@@ -61,3 +175,11 @@ target = NodePath("../..")
 target_param = "layer"
 automation_rule = SubResource("Resource_0lplv")
 seek_up_weight = 0.4
+
+[node name="Accordion" type="AudioStreamPlayer" parent="."]
+bus = &"Instruments"
+script = ExtResource("8_e4pfa")
+max_notes = 2
+samples = Array[ExtResource("9_kgpvw")]([SubResource("Resource_6k6yr"), SubResource("Resource_qj28j"), SubResource("Resource_gisok"), SubResource("Resource_pupq1"), SubResource("Resource_tl1lk"), SubResource("Resource_k7wff"), SubResource("Resource_6s58s"), SubResource("Resource_oxrty"), SubResource("Resource_glcgw"), SubResource("Resource_py6m8"), SubResource("Resource_0icju"), SubResource("Resource_0yy3i"), SubResource("Resource_t3dip"), SubResource("Resource_x6pvo")])
+env_sustain = 0.06
+env_release = 0.01

@@ -5,10 +5,11 @@ signal beat(value: int)
 signal scale_built(notes: Array)
 
 @export var scale_notes: Array[String] = []
-@export var min_octave := 4
-@export var max_octave := 6
+@export var min_octave := 0
+@export var max_octave := 3
 
 @onready var player: meta_player = $MetaPlayer
+@onready var accordion: SamplerInstrument = $Accordion
 @onready var store: GameStore = Store
 
 var layer := 0
@@ -56,5 +57,5 @@ func _on_beat(i: int):
   beat.emit((i-1)%player.beats_per_bar + 1)
 
 func play_step(value: int):
-  print(value)
-  pass
+  var note: Array = all_notes[value]
+  accordion.play_note(note[0], note[1])
