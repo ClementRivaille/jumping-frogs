@@ -3,7 +3,7 @@ class_name FrogManager
 
 @onready var store: GameStore = Store
 
-@export var platform_length := 200.0
+@export var platform_length: float = 200.0
 
 var frogs: Array[Frog] = []
 var platforms: Array[Platform] = []
@@ -30,5 +30,7 @@ func spawn_frog():
   frog.enter_game(available_platform.position.x + platform_length / 2.0)
 
 func on_frog_fall(frog: Frog):
+  if !store.game_running:
+    return
   frog.set_deferred("freeze", true)
   store.level_fail()

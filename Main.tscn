@@ -22,6 +22,7 @@ size = Vector2(1163, 20)
 [node name="Main" type="Node2D"]
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
+position = Vector2(848, 466)
 
 [node name="Platform2" parent="." instance=ExtResource("2_gr0qy")]
 position = Vector2(250, 381)
@@ -67,7 +68,7 @@ metadata/_edit_lock_ = true
 [node name="FrogManager" type="Node2D" parent="."]
 position = Vector2(0, 719.12)
 script = ExtResource("5_3wxj7")
-platform_length = 180.0
+platform_length = 0.0
 
 [node name="Area2D" type="Area2D" parent="FrogManager"]
 collision_layer = 2
@@ -81,7 +82,7 @@ shape = SubResource("RectangleShape2D_0fyud")
 
 [node name="Frog" parent="FrogManager/Frogs" instance=ExtResource("1_dn6oc")]
 z_index = 1
-position = Vector2(342, -54.12)
+position = Vector2(331, -16.12)
 VFORCE = 850.0
 
 [connection signal="timeout" from="FliesSpawner/Timer" to="FliesSpawner" method="_on_timer_timeout"]

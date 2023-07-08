@@ -1,12 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw64bi4h4q7br"]
+[gd_scene load_steps=6 format=3 uid="uid://cw64bi4h4q7br"]
 
 [ext_resource type="Script" path="res://scripts/Frog.gd" id="1_0y3sx"]
+[ext_resource type="Texture2D" uid="uid://b3nqgf77w63ca" path="res://sprites/Frogs/frog-jumping_light-green.png" id="2_utk0r"]
+[ext_resource type="Texture2D" uid="uid://cl85oio4tg7bb" path="res://sprites/Frogs/frog-sitting_light-green.png" id="3_atawm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuxjo"]
-size = Vector2(40, 40)
+size = Vector2(61, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gunv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_utk0r")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_atawm")
+}],
+"loop": true,
+"name": &"still",
+"speed": 5.0
+}]
 
 [node name="Frog" type="RigidBody2D"]
-position = Vector2(197, 430)
 collision_layer = 2
 max_contacts_reported = 1
 contact_monitor = true
@@ -14,19 +34,20 @@ lock_rotation = true
 freeze = true
 script = ExtResource("1_0y3sx")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.611765, 0.760784, 0.368627, 1)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(20, 20)
+position = Vector2(-0.5, 5)
 shape = SubResource("RectangleShape2D_fuxjo")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 19.75)
 node_a = NodePath("..")
 bias = 0.9
 disable_collision = false
 softness = 0.8
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_6gunv")
+animation = &"jump"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
