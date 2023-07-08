@@ -23,6 +23,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
     state.transform.origin = Vector2(reset_position_to, state.transform.origin.y)
     reset_position_to = -1.0
     
+  if absf(state.linear_velocity.x) > MAX_HFORCE && in_air:
+    state.linear_velocity = state.linear_velocity.normalized() * MAX_HFORCE
+    state.linear_velocity.y = -VFORCE
+    
 func _process(delta: float) -> void:
   if in_air:
     sprite.flip_h = linear_velocity.x < 0.0

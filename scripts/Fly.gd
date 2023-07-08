@@ -6,6 +6,7 @@ class_name Fly
 
 @onready var debug: ColorRect = $debugRect
 @onready var timer: Timer = $Timer
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 @export var max_y := 500.0
 @export var max_x := 1100.0
@@ -18,6 +19,7 @@ var fly_speed = 50.0
 signal catched(fly: Fly)
 
 func _ready() -> void:
+  sprite.play("default")
   pick_destination()
 
 func pick_destination():
@@ -29,6 +31,7 @@ func pick_destination():
 func _process(delta: float) -> void:
   if position.distance_to(destination) < close:
     pick_destination()
+  sprite.flip_h = velocity.x > 0
   
   velocity = position.direction_to(destination) * fly_speed
   debug.global_position = destination

@@ -1,9 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3uan07s2wxat"]
+[gd_scene load_steps=6 format=3 uid="uid://d3uan07s2wxat"]
 
 [ext_resource type="Script" path="res://scripts/Fly.gd" id="1_6fgp6"]
+[ext_resource type="Texture2D" uid="uid://dyv67my78eam" path="res://sprites/Fly/fly-flat.png" id="2_6i3sg"]
+[ext_resource type="Texture2D" uid="uid://b8jr3uktmy13s" path="res://sprites/Fly/fly-tall.png" id="3_t6m10"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ut7dh"]
 radius = 12.6491
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jorrk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6i3sg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t6m10")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Fly" type="CharacterBody2D"]
 collision_layer = 4
@@ -20,13 +36,6 @@ padding = 30.0
 shape = SubResource("CircleShape2D_ut7dh")
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 9.0
-offset_bottom = 11.0
-color = Color(0.0235294, 0.211765, 0.294118, 1)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
@@ -36,5 +45,10 @@ visible = false
 offset_right = 6.0
 offset_bottom = 5.0
 color = Color(0.831373, 0.607843, 0, 1)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_jorrk")
+frame_progress = 0.308784
 
 [connection signal="timeout" from="Timer" to="." method="pick_destination"]

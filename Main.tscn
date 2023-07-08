@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=14 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
+[ext_resource type="Texture2D" uid="uid://5c0l532o3sgv" path="res://sprites/4K-textured-bg.jpg" id="1_jsexm"]
 [ext_resource type="PackedScene" uid="uid://crje4f4x3w0f0" path="res://scenes/Platform.tscn" id="2_gr0qy"]
 [ext_resource type="Script" path="res://scripts/FliesSpawner.gd" id="3_4bvrc"]
 [ext_resource type="PackedScene" uid="uid://d3uan07s2wxat" path="res://scenes/Fly.tscn" id="3_gyo8n"]
@@ -22,10 +23,10 @@ size = Vector2(1163, 20)
 
 [node name="Main" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1204.0
-offset_bottom = 774.0
-color = Color(0.756863, 0.866667, 0.972549, 1)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.300926, 0.300926)
+texture = ExtResource("1_jsexm")
+centered = false
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
 position = Vector2(848, 466)
