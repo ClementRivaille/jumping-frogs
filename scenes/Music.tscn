@@ -28,6 +28,7 @@ invert = false
 
 [node name="Music" type="Node2D"]
 script = ExtResource("1_wo6kl")
+scale_notes = Array[String](["D", "E", "G", "A", "B", "C"])
 
 [node name="MetaPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_drh2w")

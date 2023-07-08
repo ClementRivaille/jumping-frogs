@@ -2,6 +2,11 @@ extends Node2D
 class_name Music
 
 signal beat(value: int)
+signal scale_built(notes: Array)
+
+@export var scale_notes: Array[String] = []
+@export var min_octave := 4
+@export var max_octave := 6
 
 @onready var player: meta_player = $MetaPlayer
 @onready var store: GameStore = Store
@@ -9,11 +14,35 @@ signal beat(value: int)
 var layer := 0
 var playing := false
 
+var all_notes := []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   store.game_started.connect(start)
   store.level_updated.connect(update_layer)
   player.beat.connect(_on_beat)
+  
+  build_notes()
+  var platforms := get_tree().get_nodes_in_group("platform")
+  for p in platforms:
+    var platform: Platform = p
+    platform.set_steps(all_notes.size())
+    platform.move_step.connect(play_step)
+  
+func build_notes():
+  var octave := min_octave
+  var note_idx := 0
+  var calculator = NoteValue
+  var prev_note_value := 0
+  while octave < max_octave || note_idx > 0:
+    var note_name: String = scale_notes[note_idx]
+    if (calculator.get_note_value(note_name, octave) < prev_note_value):
+      octave = octave + 1
+    all_notes.push_back([note_name, octave])
+    prev_note_value = calculator.get_note_value(note_name, octave)
+    note_idx = (note_idx + 1) % scale_notes.size()
+  all_notes.push_back([scale_notes[0], max_octave])
+  scale_built.emit(all_notes)
 
 func start():
   if !playing:
@@ -25,3 +54,7 @@ func update_layer(level: int):
 
 func _on_beat(i: int):
   beat.emit((i-1)%player.beats_per_bar + 1)
+
+func play_step(value: int):
+  print(value)
+  pass
