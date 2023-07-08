@@ -21,6 +21,11 @@ size = Vector2(1163, 20)
 
 [node name="Main" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1204.0
+offset_bottom = 774.0
+color = Color(0.756863, 0.866667, 0.972549, 1)
+
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
 position = Vector2(848, 466)
 

@@ -8,7 +8,7 @@ rough = true
 absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjp4t"]
-size = Vector2(328.12, 8)
+size = Vector2(215.9, 8)
 
 [node name="Platform" type="StaticBody2D" groups=["platform"]]
 physics_material_override = SubResource("PhysicsMaterial_yirm3")
@@ -17,7 +17,7 @@ min_pos = 175.0
 max_pos = 980.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.1, 0.15)
 texture = ExtResource("2_o7bhx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -32,7 +32,7 @@ collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(0, -17.415, 149.615, -14.04, 163.735, -1.095, -1.67, 17.81, -170.64, -0.06, -86.325, -11.225)
+polygon = PackedVector2Array(1, -20, 101, -18, 118, 1, 59, 14, -6, 21, -68, 13, -116, 1, -84, -10)
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_mouse_exited"]
