@@ -9,9 +9,11 @@ class_name FliesSpawner
 var flies_count = 0
 
 @onready var timer: Timer = $Timer
+@onready var store: GameStore = Store
 
 func _ready() -> void:
-  activate()
+  store.game_started.connect(activate)
+  store.game_over.connect(deactivate)
 
 func spawn_fly():
   var fly: Fly = fly_prefab.instantiate()
@@ -32,3 +34,6 @@ func on_fly_catched(fly: Fly):
 func activate():
   spawn_fly()
   timer.start()
+
+func deactivate():
+  timer.stop()

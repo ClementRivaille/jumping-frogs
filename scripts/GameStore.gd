@@ -6,6 +6,7 @@ class_name GameStore
 
 var level = 0
 var score = 0
+var game_running = false
 var finished = false
 
 signal score_updated(value: int)
@@ -14,6 +15,7 @@ signal level_up
 signal level_down
 signal complete
 signal game_over
+signal game_started
 
 func catch_fly():
   score += 1
@@ -37,4 +39,9 @@ func level_fail():
   level_updated.emit(level)
   level_down.emit()
   if level == 0:
+    game_running = false
     game_over.emit()
+    
+func start_game():
+  game_running = true
+  game_started.emit()

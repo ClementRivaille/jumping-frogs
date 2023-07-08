@@ -9,7 +9,7 @@ absorbent = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjp4t"]
 size = Vector2(200, 68)
 
-[node name="Platform" type="StaticBody2D"]
+[node name="Platform" type="StaticBody2D" groups=["platform"]]
 position = Vector2(0, 498)
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_yirm3")

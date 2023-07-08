@@ -7,9 +7,11 @@ size = Vector2(40, 40)
 
 [node name="Frog" type="RigidBody2D"]
 position = Vector2(197, 430)
+collision_layer = 2
 max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
+freeze = true
 script = ExtResource("1_0y3sx")
 
 [node name="ColorRect" type="ColorRect" parent="."]

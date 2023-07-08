@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=12 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="PackedScene" uid="uid://crje4f4x3w0f0" path="res://scenes/Platform.tscn" id="2_gr0qy"]
 [ext_resource type="Script" path="res://scripts/FliesSpawner.gd" id="3_4bvrc"]
 [ext_resource type="PackedScene" uid="uid://d3uan07s2wxat" path="res://scenes/Fly.tscn" id="3_gyo8n"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="4_jfj8j"]
 [ext_resource type="PackedScene" uid="uid://bgja3y0mfnuqr" path="res://scenes/Debug.tscn" id="4_lix75"]
+[ext_resource type="Script" path="res://scripts/FrogManager.gd" id="5_3wxj7"]
+[ext_resource type="PackedScene" uid="uid://0h3vfey740nl" path="res://scenes/StartScreen.tscn" id="5_o8sl8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
 rough = true
@@ -13,13 +16,10 @@ bounce = 1.0
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ql2dt"]
 b = Vector2(0, 498)
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fyud"]
+size = Vector2(1163, 20)
 
-[node name="Frog" parent="." instance=ExtResource("1_dn6oc")]
-z_index = 1
-position = Vector2(47, 458)
-collision_layer = 2
-VFORCE = 850.0
+[node name="Main" type="Node2D"]
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
 
@@ -57,7 +57,32 @@ wait_time = 3.4
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
 follow_viewport_enabled = true
+script = ExtResource("4_jfj8j")
+
+[node name="Start" parent="UI" instance=ExtResource("5_o8sl8")]
 
 [node name="Debug" parent="UI" instance=ExtResource("4_lix75")]
+metadata/_edit_lock_ = true
+
+[node name="FrogManager" type="Node2D" parent="."]
+position = Vector2(0, 719.12)
+script = ExtResource("5_3wxj7")
+platform_length = 180.0
+
+[node name="Area2D" type="Area2D" parent="FrogManager"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrogManager/Area2D"]
+position = Vector2(571.5, 0)
+shape = SubResource("RectangleShape2D_0fyud")
+
+[node name="Frogs" type="Node2D" parent="FrogManager"]
+
+[node name="Frog" parent="FrogManager/Frogs" instance=ExtResource("1_dn6oc")]
+z_index = 1
+position = Vector2(342, -54.12)
+VFORCE = 850.0
 
 [connection signal="timeout" from="FliesSpawner/Timer" to="FliesSpawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="FrogManager/Area2D" to="FrogManager" method="on_frog_fall"]
