@@ -40,7 +40,8 @@ func level_fail():
     game_running = false
     game_over.emit()
     level = 0
-  level_updated.emit(level)
+  else:
+    level_updated.emit(level)
   level_down.emit()
     
 func start_game():

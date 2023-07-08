@@ -21,7 +21,10 @@ var all_notes := []
 func _ready() -> void:
   store.game_started.connect(start)
   store.level_updated.connect(update_layer)
+  store.game_over.connect(on_game_over)
   player.beat.connect(_on_beat)
+  player.mplay()
+  
   
   build_notes()
   var platforms := get_tree().get_nodes_in_group("platform")
@@ -46,12 +49,13 @@ func build_notes():
   scale_built.emit(all_notes)
 
 func start():
-  if !playing:
-    player.mplay()
-    playing = true
+  layer = 1
+  
+func on_game_over():
+  layer = 0
 
 func update_layer(level: int):
-  layer = level
+  layer = level + 1
 
 func _on_beat(i: int):
   beat.emit((i-1)%player.beats_per_bar + 1)

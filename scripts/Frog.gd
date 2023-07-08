@@ -7,8 +7,8 @@ class_name Frog
 
 var beats_scores: Array[Array] = [
   [1],
-  [1,1,2,3],
-  [1,2,3]
+  [1,1,2,3,-1,-1],
+  [1,2,3,-1,-1]
 ]
 
 @onready var joint: PinJoint2D = $PinJoint2D
@@ -65,3 +65,5 @@ func on_beat(beat: int):
   if !freeze && !in_air:
     if beat == scheduled_jump_on:
       jump()
+    elif beat == 1 && scheduled_jump_on == -1:
+      schedule_jump()

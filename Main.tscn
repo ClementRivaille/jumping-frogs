@@ -19,7 +19,8 @@ rough = true
 bounce = 1.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ql2dt"]
-b = Vector2(0, 498)
+a = Vector2(0, -40)
+b = Vector2(0, 753)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fyud"]
 size = Vector2(1163, 20)
