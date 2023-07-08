@@ -15,7 +15,7 @@ var destination: Vector2
 var close := 2
 var fly_speed = 50.0
 
-signal catched
+signal catched(fly: Fly)
 
 func _ready() -> void:
   pick_destination()
@@ -35,5 +35,4 @@ func _process(delta: float) -> void:
   move_and_slide()
 
 func on_catch():
-  catched.emit()
-  queue_free()
+  catched.emit(self)
