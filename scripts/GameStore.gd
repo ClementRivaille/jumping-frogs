@@ -43,6 +43,8 @@ func level_fail():
     game_running = false
     game_over.emit()
     level = 0
+    score = 0
+    score_updated.emit(score)
     
 func start_game():
   game_running = true

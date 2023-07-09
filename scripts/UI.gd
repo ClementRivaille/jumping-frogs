@@ -3,12 +3,16 @@ class_name UI
 
 @onready var start_screen: Control = $Start
 @onready var gameover: Control = $"Game Over"
-@onready var thanks: Control = $Thanks
+@onready var messages: Control = $Messages
+@onready var progress_bar: ScoreProgressBar = $ProgressBar
+@onready var message_text: Label = $Messages/Label
 @onready var store: GameStore = Store
 
 @export var cursor_default: Texture2D
 @export var cursor_drag: Texture2D
 @export var cursor_drop: Texture2D
+
+@export_multiline var end_text := ""
 
 func _ready() -> void:
   Input.set_custom_mouse_cursor(cursor_default)
@@ -38,8 +42,11 @@ func start():
   
 func on_game_over():
   fade(gameover, true, 0.2)
+
 func on_finished():
-  fade(thanks, true)  
+  await fade(progress_bar, false).finished
+  message_text.text = end_text
+  fade(messages, true)
 
 func set_cursor_drag():
   Input.set_custom_mouse_cursor(cursor_drag)
@@ -48,8 +55,9 @@ func set_cursor_drop():
 func set_cursor_default():
   Input.set_custom_mouse_cursor(cursor_default)
   
-func fade(screen: Control, fade_in: bool, duration := 0.4):
+func fade(screen: Control, fade_in: bool, duration := 0.4) -> Tween:
   var tween := create_tween()
   tween.tween_property(screen, "modulate", Color.WHITE if fade_in else Color.TRANSPARENT, duration
     ).set_ease(Tween.EASE_IN_OUT
     ).set_trans(Tween.TRANS_SINE)
+  return tween

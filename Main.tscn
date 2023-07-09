@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=24 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="Texture2D" uid="uid://bsn0akm3tblnq" path="res://sprites/4K-textured-bg-with-reeds.jpg" id="1_ysant"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b40h04wwpbs6v" path="res://sprites/Cursor/cursor-main.png" id="6_oyutr"]
 [ext_resource type="Texture2D" uid="uid://cxixhtcni44xm" path="res://sprites/Cursor/cursor-closed-hand.png" id="7_qrhb3"]
 [ext_resource type="PackedScene" uid="uid://jisv04je2hpd" path="res://scenes/Music.tscn" id="9_ylqg5"]
+[ext_resource type="Texture2D" uid="uid://6di632vscufi" path="res://sprites/UI/text-bg.png" id="10_6jb25"]
 [ext_resource type="SpriteFrames" uid="uid://c7dmk7itbm2d6" path="res://sprites/Frogs/Frog_light.tres" id="10_b7bll"]
 [ext_resource type="Texture2D" uid="uid://xt8bybwq5n" path="res://sprites/UI/border.png" id="11_ml8gu"]
 [ext_resource type="SpriteFrames" uid="uid://rf2yipwu4htq" path="res://sprites/Frogs/Frog_forest.tres" id="11_p2gu2"]
@@ -80,6 +81,7 @@ script = ExtResource("4_jfj8j")
 cursor_default = ExtResource("6_oyutr")
 cursor_drag = ExtResource("6_ehbfo")
 cursor_drop = ExtResource("7_qrhb3")
+end_text = "Thank you for playing!"
 
 [node name="Frame" type="TextureRect" parent="UI"]
 anchors_preset = 15
@@ -89,6 +91,44 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_ml8gu")
 expand_mode = 2
+
+[node name="Messages" type="Control" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchor_left = 0.311
+anchor_top = 0.008
+anchor_right = 0.711
+anchor_bottom = 0.114
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Messages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_6jb25")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/Messages"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_ny8tw")
+theme_override_font_sizes/font_size = 25
+text = "Thank you for playing!
+You can play with the frogs now"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ProgressBar" parent="UI" instance=ExtResource("11_px4ef")]
 anchor_left = 0.309
@@ -124,29 +164,6 @@ theme_override_colors/font_color = Color(0.721569, 0.196078, 0.0431373, 1)
 theme_override_fonts/font = ExtResource("13_ny8tw")
 theme_override_font_sizes/font_size = 40
 text = "Click to try again"
-horizontal_alignment = 1
-
-[node name="Thanks" type="Control" parent="UI"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="UI/Thanks"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.27
-anchor_right = 1.0
-anchor_bottom = 0.27
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.721569, 0.196078, 0.0431373, 1)
-theme_override_fonts/font = ExtResource("13_ny8tw")
-theme_override_font_sizes/font_size = 40
-text = "Thank you for playing!"
 horizontal_alignment = 1
 
 [node name="FrogManager" type="Node2D" parent="."]
