@@ -8,6 +8,7 @@ class_name Fly
 @onready var timer: Timer = $Timer
 @onready var sprite: AnimatedSprite2D = $Sprite
 
+@export var min_y := 50.0
 @export var max_y := 500.0
 @export var max_x := 1100.0
 @export var padding := 10.0

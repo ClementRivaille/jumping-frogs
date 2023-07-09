@@ -29,7 +29,7 @@ script = ExtResource("1_6fgp6")
 speed = 200.0
 speed_diff = 50.0
 max_y = 250.0
-max_x = 1150.0
+max_x = 1340.0
 padding = 30.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

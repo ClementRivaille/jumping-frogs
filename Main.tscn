@@ -28,12 +28,13 @@ a = Vector2(0, -40)
 b = Vector2(0, 753)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fyud"]
-size = Vector2(1163, 20)
+size = Vector2(1366, 20)
 
 [node name="Main" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-scale = Vector2(0.300926, 0.300926)
+position = Vector2(0, -93)
+scale = Vector2(0.352865, 0.350926)
 texture = ExtResource("1_ysant")
 centered = false
 
@@ -49,6 +50,7 @@ position = Vector2(547, 573)
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(18.84, 0)
 physics_material_override = SubResource("PhysicsMaterial_4owon")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
@@ -56,7 +58,7 @@ shape = SubResource("SegmentShape2D_ql2dt")
 metadata/_edit_lock_ = true
 
 [node name="Wall2" type="StaticBody2D" parent="Walls"]
-position = Vector2(1151, 0)
+position = Vector2(1341, 0)
 physics_material_override = SubResource("PhysicsMaterial_4owon")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
@@ -73,7 +75,6 @@ wait_time = 3.4
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 2
-follow_viewport_enabled = true
 script = ExtResource("4_jfj8j")
 cursor_default = ExtResource("6_oyutr")
 cursor_drag = ExtResource("6_ehbfo")
@@ -110,7 +111,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrogManager/Area2D"]
-position = Vector2(571.5, 0)
+position = Vector2(673, 0)
 shape = SubResource("RectangleShape2D_0fyud")
 
 [node name="Frogs" type="Node2D" parent="FrogManager"]
@@ -134,6 +135,11 @@ VFORCE = 850.0
 frames = ExtResource("12_wc38j")
 
 [node name="Music" parent="." instance=ExtResource("9_ylqg5")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -95.615)
+anchor_mode = 0
+zoom = Vector2(0.85, 0.85)
 
 [connection signal="fly_catched" from="FliesSpawner" to="Music" method="on_play_fly"]
 [connection signal="timeout" from="FliesSpawner/Timer" to="FliesSpawner" method="_on_timer_timeout"]
