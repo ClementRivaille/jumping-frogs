@@ -24,6 +24,7 @@ signal jumped
 func _ready() -> void:
   sprite.sprite_frames = frames
   store.complete.connect(free_jump_beat)
+  store.tutorial_end.connect(schedule_jump)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
   if reset_position_to > -1.0:
@@ -51,7 +52,7 @@ func _on_body_entered(body: Node) -> void:
     joint.node_b = body.get_path()
     in_air = false
     sprite.animation = "still"
-    if !store.finished:
+    if !store.finished && !store.tutorial_active:
       schedule_jump()
   if body is Fly:
     store.catch_fly()
@@ -78,7 +79,7 @@ func on_beat(beat: int):
     if beat == scheduled_jump_on:
       free_jump_beat()
       jump()
-    elif !store.finished && beat == 1 && scheduled_jump_on == -1:
+    elif !store.finished && !store.tutorial_active && beat == 1 && scheduled_jump_on == -1:
       schedule_jump()
 
 func free_jump_beat():

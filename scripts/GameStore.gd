@@ -11,6 +11,9 @@ var finished = false
 
 var beats_available := [1,2,3]
 
+var tutorial_active := true
+@onready var tutorial_timer: Timer = $Timer
+
 signal score_updated(value: int)
 signal level_updated(value: int)
 signal level_up
@@ -18,6 +21,7 @@ signal level_down
 signal complete
 signal game_over
 signal game_started
+signal tutorial_end
 
 func catch_fly():
   score += 1
@@ -58,3 +62,10 @@ func schedule_beat(beat: int) -> int:
   
 func return_beat(beat: int):
   beats_available.append(beat)
+
+func complete_tutorial():
+  if tutorial_active && tutorial_timer.is_stopped():
+    tutorial_timer.start()
+    await tutorial_timer.timeout
+    tutorial_active = false
+    tutorial_end.emit()

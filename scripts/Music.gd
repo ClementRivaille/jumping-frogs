@@ -34,12 +34,12 @@ var last_note: String = ""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   store.game_started.connect(start)
+  store.tutorial_end.connect(on_tuto_end)
   store.level_updated.connect(update_layer)
   store.game_over.connect(on_game_over)
   store.level_up.connect(play_success)
   store.level_down.connect(play_fail)
   player.beat.connect(_on_beat)
-  player.mplay()
   
   build_notes()
   var platforms := get_tree().get_nodes_in_group("platform")
@@ -70,6 +70,14 @@ func build_notes():
   scale_built.emit(all_notes)
 
 func start():
+  if !playing:
+    player.mplay()
+    playing = true
+  else:
+    layer = 1
+  
+func on_tuto_end():
+  await beat
   layer = 1
   
 func on_game_over():

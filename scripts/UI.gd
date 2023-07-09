@@ -6,6 +6,7 @@ class_name UI
 @onready var progress_bar: ScoreProgressBar = $ProgressBar
 @onready var message_text: Label = $Messages/Label
 @onready var store: GameStore = Store
+@onready var timer: Timer = $Timer
 
 @export var cursor_default: Texture2D
 @export var cursor_drag: Texture2D
@@ -13,6 +14,7 @@ class_name UI
 
 @export_multiline var end_text := ""
 @export_multiline var game_over_text := ""
+@export_multiline var tutorial_text := ""
 
 var lock_tween: Tween
 
@@ -21,8 +23,11 @@ func _ready() -> void:
   
   store.game_over.connect(on_game_over)
   store.complete.connect(on_finished)
+  store.tutorial_end.connect(on_tutorial_end)
   
   start_screen.visible = true
+  
+  message_text.text = tutorial_text
   
   var platforms := get_tree().get_nodes_in_group("platform")
   for p in platforms:
@@ -72,3 +77,9 @@ func fade(screen: Control, fade_in: bool, duration := 0.4) -> Tween:
     ).set_ease(Tween.EASE_IN_OUT
     ).set_trans(Tween.TRANS_SINE)
   return tween
+  
+func on_tutorial_end():
+  timer.start()
+  await timer.timeout
+  await fade(messages, false).finished
+  fade(progress_bar, true)

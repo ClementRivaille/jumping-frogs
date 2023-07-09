@@ -49,6 +49,8 @@ func _process(_delta: float) -> void:
     if step != last_step:
       move_step.emit(step)
       last_step = step
+      if store.tutorial_active:
+        store.complete_tutorial()
 
 func _on_mouse_entered() -> void:
   mouse_inside = true
