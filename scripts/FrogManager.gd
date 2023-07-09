@@ -26,14 +26,23 @@ func spawn_frog():
     return
   var frog: Frog = available_frogs[0]
   
+  var platform := choose_platform()
+  frog.enter_game(platform.position.x + platform_length / 2.0)
+
+func choose_platform() -> Platform:
   var available_platform: Platform = platforms.pick_random()
   while available_platform.dragged:
     available_platform = platforms.pick_random()
-  
-  frog.enter_game(available_platform.position.x + platform_length / 2.0)
+  return available_platform
 
 func on_frog_fall(frog: Frog):
   if !store.game_running:
     return
-  frog.exit_game()
-  store.level_fail()
+  elif store.finished:
+    var platform := choose_platform()
+    frog.exit_game()
+    frog.enter_game(platform.position.x + platform_length / 2.0)
+    return
+  else:
+    frog.exit_game()
+    store.level_fail()
