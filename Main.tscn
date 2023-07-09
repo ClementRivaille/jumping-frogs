@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=20 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="Texture2D" uid="uid://5c0l532o3sgv" path="res://sprites/4K-textured-bg.jpg" id="1_jsexm"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bgja3y0mfnuqr" path="res://scenes/Debug.tscn" id="4_lix75"]
 [ext_resource type="Script" path="res://scripts/FrogManager.gd" id="5_3wxj7"]
 [ext_resource type="PackedScene" uid="uid://0h3vfey740nl" path="res://scenes/StartScreen.tscn" id="5_o8sl8"]
+[ext_resource type="Texture2D" uid="uid://cc7elroeqsbow" path="res://sprites/Cursor/cursor-open-hand.png" id="6_ehbfo"]
+[ext_resource type="Texture2D" uid="uid://b40h04wwpbs6v" path="res://sprites/Cursor/cursor-main.png" id="6_oyutr"]
+[ext_resource type="Texture2D" uid="uid://cxixhtcni44xm" path="res://sprites/Cursor/cursor-closed-hand.png" id="7_qrhb3"]
 [ext_resource type="PackedScene" uid="uid://jisv04je2hpd" path="res://scenes/Music.tscn" id="9_ylqg5"]
 [ext_resource type="SpriteFrames" uid="uid://c7dmk7itbm2d6" path="res://sprites/Frogs/Frog_light.tres" id="10_b7bll"]
 [ext_resource type="SpriteFrames" uid="uid://rf2yipwu4htq" path="res://sprites/Frogs/Frog_forest.tres" id="11_p2gu2"]
@@ -70,6 +73,9 @@ wait_time = 3.4
 layer = 2
 follow_viewport_enabled = true
 script = ExtResource("4_jfj8j")
+cursor_default = ExtResource("6_oyutr")
+cursor_drag = ExtResource("6_ehbfo")
+cursor_drop = ExtResource("7_qrhb3")
 
 [node name="Start" parent="UI" instance=ExtResource("5_o8sl8")]
 

@@ -13,14 +13,22 @@ var step_length := 10.0
 var last_step := 0
 
 signal move_step(step: int)
+signal drag_hover
+signal drag_on
+signal drag_exit
 
 func _input(event: InputEvent) -> void:
   if event is InputEventMouseButton:
     if event.is_pressed() && mouse_inside:
       dragged = true
       pos_diff = get_viewport().get_mouse_position().x - global_position.x
+      drag_on.emit()
     elif dragged && !event.is_pressed():
       dragged = false
+      if mouse_inside:
+        drag_hover.emit()
+      else:
+        drag_exit.emit()
       
 func calc_step() -> int:
   return mini(floori((position.x - min_pos) / (step_length)), nb_steps - 1)
@@ -37,8 +45,12 @@ func _process(_delta: float) -> void:
 
 func _on_mouse_entered() -> void:
   mouse_inside = true
+  if !dragged:
+    drag_hover.emit()
 func _on_mouse_exited() -> void:
   mouse_inside = false
+  if !dragged:
+    drag_exit.emit()
 
 func set_steps(nb: int):
   nb_steps = nb
