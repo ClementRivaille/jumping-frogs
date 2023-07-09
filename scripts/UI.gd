@@ -45,6 +45,20 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
   if !store.game_running && event is InputEventMouseButton && event.is_pressed():
     start()
+  
+  if !OS.has_feature("web"):
+    if event.is_action_pressed("fullscreen"):
+      var window := get_window()
+      if window.get_mode() == Window.MODE_FULLSCREEN:
+        window.set_mode(Window.MODE_WINDOWED)
+      else:
+        window.set_mode(Window.MODE_FULLSCREEN)
+    if event.is_action_pressed("ui_cancel"):
+      var window := get_window()
+      if window.get_mode() == Window.MODE_FULLSCREEN:
+        window.set_mode(Window.MODE_WINDOWED)
+      else:
+        get_tree().quit()
 
 func start():
   store.start_game()

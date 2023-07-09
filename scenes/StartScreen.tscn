@@ -47,7 +47,7 @@ texture = ExtResource("1_d5nwv")
 expand_mode = 2
 
 [node name="Click" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.998606)
+modulate = Color(1, 1, 1, 0.593355)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.605
