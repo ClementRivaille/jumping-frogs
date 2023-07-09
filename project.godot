@@ -22,7 +22,7 @@ NoteValue="*res://addons/SimpleSampler/note_value.gd"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

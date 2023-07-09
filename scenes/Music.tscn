@@ -289,7 +289,7 @@ seek_up_weight = 0.1
 seek_down_weight = 0.3
 
 [node name="Accordion" type="AudioStreamPlayer" parent="."]
-volume_db = -3.939
+volume_db = -4.5
 bus = &"Instruments"
 script = ExtResource("8_e4pfa")
 max_notes = 2

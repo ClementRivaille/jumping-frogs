@@ -40,13 +40,13 @@ texture = ExtResource("1_ysant")
 centered = false
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
-position = Vector2(848, 466)
+position = Vector2(1120, 480)
 
 [node name="Platform2" parent="." instance=ExtResource("2_gr0qy")]
-position = Vector2(250, 381)
+position = Vector2(240, 380)
 
 [node name="Platform3" parent="." instance=ExtResource("2_gr0qy")]
-position = Vector2(547, 573)
+position = Vector2(680, 580)
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -101,9 +101,10 @@ visible = false
 metadata/_edit_lock_ = true
 
 [node name="Start" parent="UI" instance=ExtResource("12_colmd")]
+visible = false
 
 [node name="Game Over" type="Control" parent="UI"]
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -126,7 +127,7 @@ text = "Click to try again"
 horizontal_alignment = 1
 
 [node name="Thanks" type="Control" parent="UI"]
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
