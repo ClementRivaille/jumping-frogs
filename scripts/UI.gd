@@ -2,7 +2,6 @@ extends CanvasLayer
 class_name UI
 
 @onready var start_screen: Control = $Start
-@onready var gameover: Control = $"Game Over"
 @onready var messages: Control = $Messages
 @onready var progress_bar: ScoreProgressBar = $ProgressBar
 @onready var message_text: Label = $Messages/Label
@@ -13,6 +12,9 @@ class_name UI
 @export var cursor_drop: Texture2D
 
 @export_multiline var end_text := ""
+@export_multiline var game_over_text := ""
+
+var lock_tween: Tween
 
 func _ready() -> void:
   Input.set_custom_mouse_cursor(cursor_default)
@@ -38,10 +40,19 @@ func start():
   if start_screen.modulate.a > 0.0:
     fade(start_screen, false)
   else:
-    fade(gameover, false, 0.2)
+    if lock_tween && lock_tween.is_running():
+      await lock_tween.finished
+    await fade(messages, false).finished
+    fade(progress_bar, true)
   
 func on_game_over():
-  fade(gameover, true, 0.2)
+  lock_tween = fade(progress_bar, false, 0.3)
+  await lock_tween.finished
+  if store.game_running:
+    return
+  message_text.text = game_over_text
+  lock_tween = fade(messages, true)
+  
 
 func on_finished():
   await fade(progress_bar, false).finished
