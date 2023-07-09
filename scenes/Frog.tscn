@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://c7dmk7itbm2d6" path="res://sprites/Frogs/Frog_light.tres" id="2_ggf6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuxjo"]
-size = Vector2(61, 30)
+size = Vector2(61, 38)
 
 [node name="Frog" type="RigidBody2D" groups=["frog"]]
 collision_layer = 2
@@ -16,7 +16,7 @@ freeze = true
 script = ExtResource("1_0y3sx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 5)
+position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_fuxjo")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
