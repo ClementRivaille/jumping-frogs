@@ -1,8 +1,8 @@
 extends RigidBody2D
 class_name Frog
 
-@export var VFORCE = 1000.0
-@export var MAX_HFORCE = 400.0
+@export var VFORCE := 1000.0
+@export var MAX_HFORCE := 400.0
 @export var frames: SpriteFrames
 
 var beats_scores: Array[Array] = [
@@ -42,7 +42,10 @@ func _process(_delta: float) -> void:
 
 func jump():
   joint.node_b = "."
-  apply_central_impulse(Vector2(randf_range(-MAX_HFORCE, MAX_HFORCE), -VFORCE))
+  var facetious = randi()%3 > 1
+  var direction := -1.0 if randf() > 0.5 else 1.0
+  var hforce := direction * MAX_HFORCE * randf_range(0.8, 1.0) if facetious else randf_range(-MAX_HFORCE, MAX_HFORCE)
+  apply_central_impulse(Vector2(hforce, -VFORCE))
   sprite.animation = "jump"
   in_air = true
   jumped.emit()
