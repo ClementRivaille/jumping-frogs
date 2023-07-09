@@ -2,6 +2,8 @@ extends CanvasLayer
 class_name UI
 
 @onready var start_screen: Control = $Start
+@onready var gameover: Control = $"Game Over"
+@onready var thanks: Control = $Thanks
 @onready var store: GameStore = Store
 
 @export var cursor_default: Texture2D
@@ -11,6 +13,9 @@ class_name UI
 func _ready() -> void:
   Input.set_custom_mouse_cursor(cursor_default)
   
+  store.game_over.connect(on_game_over)
+  store.complete.connect(on_finished)
+  
   var platforms := get_tree().get_nodes_in_group("platform")
   for p in platforms:
     var platform: Platform = p
@@ -19,12 +24,18 @@ func _ready() -> void:
     platform.drag_exit.connect(set_cursor_default)
 
 func _input(event: InputEvent) -> void:
-  if event.is_action_pressed("ui_accept") && !store.game_running:
+  if !store.game_running && event is InputEventMouseButton && event.is_pressed():
     start()
 
 func start():
   store.start_game()
   start_screen.visible = false
+  gameover.visible = false
+  
+func on_game_over():
+  gameover.visible = true
+func on_finished():
+  thanks.visible = true
 
 func set_cursor_drag():
   Input.set_custom_mouse_cursor(cursor_drag)

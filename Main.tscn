@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=23 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
 [ext_resource type="Texture2D" uid="uid://bsn0akm3tblnq" path="res://sprites/4K-textured-bg-with-reeds.jpg" id="1_ysant"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://scripts/UI.gd" id="4_jfj8j"]
 [ext_resource type="PackedScene" uid="uid://bgja3y0mfnuqr" path="res://scenes/Debug.tscn" id="4_lix75"]
 [ext_resource type="Script" path="res://scripts/FrogManager.gd" id="5_3wxj7"]
-[ext_resource type="PackedScene" uid="uid://0h3vfey740nl" path="res://scenes/StartScreen.tscn" id="5_o8sl8"]
 [ext_resource type="Texture2D" uid="uid://cc7elroeqsbow" path="res://sprites/Cursor/cursor-open-hand.png" id="6_ehbfo"]
 [ext_resource type="Texture2D" uid="uid://b40h04wwpbs6v" path="res://sprites/Cursor/cursor-main.png" id="6_oyutr"]
 [ext_resource type="Texture2D" uid="uid://cxixhtcni44xm" path="res://sprites/Cursor/cursor-closed-hand.png" id="7_qrhb3"]
@@ -17,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://xt8bybwq5n" path="res://sprites/UI/border.png" id="11_ml8gu"]
 [ext_resource type="SpriteFrames" uid="uid://rf2yipwu4htq" path="res://sprites/Frogs/Frog_forest.tres" id="11_p2gu2"]
 [ext_resource type="PackedScene" uid="uid://bididdt3lg84j" path="res://scenes/ProgressBar.tscn" id="11_px4ef"]
+[ext_resource type="PackedScene" uid="uid://0h3vfey740nl" path="res://scenes/StartScreen.tscn" id="12_colmd"]
 [ext_resource type="SpriteFrames" uid="uid://brsyp0p1k7yai" path="res://sprites/Frogs/Frog_brown.tres" id="12_wc38j"]
+[ext_resource type="FontFile" uid="uid://ff7c22x8w1v" path="res://fonts/CherryPie.otf" id="13_ny8tw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
 rough = true
@@ -80,8 +81,6 @@ cursor_default = ExtResource("6_oyutr")
 cursor_drag = ExtResource("6_ehbfo")
 cursor_drop = ExtResource("7_qrhb3")
 
-[node name="Start" parent="UI" instance=ExtResource("5_o8sl8")]
-
 [node name="Frame" type="TextureRect" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,6 +99,54 @@ anchor_bottom = 0.148
 [node name="Debug" parent="UI" instance=ExtResource("4_lix75")]
 visible = false
 metadata/_edit_lock_ = true
+
+[node name="Start" parent="UI" instance=ExtResource("12_colmd")]
+
+[node name="Game Over" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Game Over"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.27
+anchor_right = 1.0
+anchor_bottom = 0.27
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.721569, 0.196078, 0.0431373, 1)
+theme_override_fonts/font = ExtResource("13_ny8tw")
+theme_override_font_sizes/font_size = 40
+text = "Click to try again"
+horizontal_alignment = 1
+
+[node name="Thanks" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Thanks"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.27
+anchor_right = 1.0
+anchor_bottom = 0.27
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.721569, 0.196078, 0.0431373, 1)
+theme_override_fonts/font = ExtResource("13_ny8tw")
+theme_override_font_sizes/font_size = 40
+text = "Thank you for playing!"
+horizontal_alignment = 1
 
 [node name="FrogManager" type="Node2D" parent="."]
 position = Vector2(0, 719.12)

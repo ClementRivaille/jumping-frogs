@@ -1,4 +1,13 @@
-[gd_scene format=3 uid="uid://0h3vfey740nl"]
+[gd_scene load_steps=5 format=3 uid="uid://0h3vfey740nl"]
+
+[ext_resource type="Texture2D" uid="uid://hxpvihc7pr7" path="res://sprites/UI/title-screen-no-text.jpg" id="1_bwe16"]
+[ext_resource type="FontFile" uid="uid://ff7c22x8w1v" path="res://fonts/CherryPie.otf" id="2_5ygqb"]
+
+[sub_resource type="FontVariation" id="FontVariation_2cfcq"]
+base_font = ExtResource("2_5ygqb")
+
+[sub_resource type="FontVariation" id="FontVariation_570l4"]
+base_font = ExtResource("2_5ygqb")
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -7,3 +16,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bwe16")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -13.0
+offset_right = 55.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.721569, 0.196078, 0.0431373, 1)
+theme_override_fonts/font = SubResource("FontVariation_2cfcq")
+theme_override_font_sizes/font_size = 117
+text = "Spring's
+Ballet"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Click" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.753
+anchor_right = 0.5
+anchor_bottom = 0.848
+offset_left = -55.0
+offset_top = -13.0
+offset_right = 55.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.494118, 0.121569, 0.0156863, 1)
+theme_override_fonts/font = SubResource("FontVariation_570l4")
+theme_override_font_sizes/font_size = 31
+text = "Click anywhere to start"
+horizontal_alignment = 1
