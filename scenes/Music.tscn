@@ -261,8 +261,8 @@ target = NodePath("../..")
 target_param = "layer"
 param_smooth = 0.0
 automation_rule = SubResource("Resource_svxe7")
-seek_up_weight = 0.1
-seek_down_weight = 0.3
+seek_up_weight = 1.8
+seek_down_weight = 0.6
 
 [node name="layer3" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
 stream = ExtResource("7_j5i2i")
@@ -273,8 +273,8 @@ target = NodePath("../..")
 target_param = "layer"
 param_smooth = 0.0
 automation_rule = SubResource("Resource_0lplv")
-seek_up_weight = 0.1
-seek_down_weight = 0.3
+seek_up_weight = 1.8
+seek_down_weight = 0.6
 
 [node name="layer4" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
 stream = ExtResource("8_mtgcg")
@@ -285,8 +285,8 @@ target = NodePath("../..")
 target_param = "layer"
 param_smooth = 0.0
 automation_rule = SubResource("Resource_5etd1")
-seek_up_weight = 0.1
-seek_down_weight = 0.3
+seek_up_weight = 1.8
+seek_down_weight = 0.6
 
 [node name="Accordion" type="AudioStreamPlayer" parent="."]
 volume_db = -4.5

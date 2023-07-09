@@ -124,7 +124,6 @@ func on_play_fly():
 func play_success():
   var sound: AudioStream = win_sounds.pick_random()
   win_sfx.stream = sound
-  await beat
   win_sfx.play()
   
 func play_fail():
