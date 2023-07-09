@@ -19,6 +19,8 @@ var reset_position_to := -1.0
 var in_air := true
 var scheduled_jump_on := 1
 
+signal jumped
+
 func _ready() -> void:
   sprite.sprite_frames = frames
 
@@ -41,6 +43,7 @@ func jump():
   apply_central_impulse(Vector2(randf_range(-MAX_HFORCE, MAX_HFORCE), -VFORCE))
   sprite.animation = "jump"
   in_air = true
+  jumped.emit()
 
 func _on_body_entered(body: Node) -> void:
   if body is Platform:

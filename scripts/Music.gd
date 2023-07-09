@@ -4,18 +4,27 @@ class_name Music
 signal beat(value: int)
 signal scale_built(notes: Array)
 
+enum InstrumentKind {
+  FROG,
+  FLY
+}
+
 @export var scale_notes: Array[String] = []
+@export var sheets: Array[MusicSheet] = []
 @export var min_octave := 0
 @export var max_octave := 3
 
 @onready var player: meta_player = $MetaPlayer
 @onready var accordion: SamplerInstrument = $Accordion
+@onready var frog: SamplerInstrument = $Frog
+@onready var flies: SamplerInstrument = $Fly
 @onready var store: GameStore = Store
 
 var layer := 0
 var playing := false
 
 var all_notes := []
+var last_note: String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,13 +34,18 @@ func _ready() -> void:
   player.beat.connect(_on_beat)
   player.mplay()
   
-  
   build_notes()
   var platforms := get_tree().get_nodes_in_group("platform")
   for p in platforms:
     var platform: Platform = p
     platform.set_steps(all_notes.size())
     platform.move_step.connect(play_step)
+    
+  var frogs := get_tree().get_nodes_in_group("frog")
+  for f in frogs:
+    var frog_inst: Frog = f
+    beat.connect(frog_inst.on_beat)
+    frog_inst.jumped.connect(func (): play_note(InstrumentKind.FROG))
   
 func build_notes():
   var octave := min_octave
@@ -63,3 +77,31 @@ func _on_beat(i: int):
 func play_step(value: int):
   var note: Array = all_notes[value]
   accordion.play_note(note[0], note[1])
+
+func pick_note(scores: Array[int]) -> String:
+  var total: int = scores.reduce(func(sum, value): return sum + value, 0)
+  var score = randi_range(0, total-1)
+  
+  var idx := 0
+  var acc := scores[0]
+  while (score >= acc && idx < scores.size()):
+    idx += 1
+    acc += scores[idx]
+  return scale_notes[idx]
+  
+func play_note(kind: InstrumentKind):
+  var instrument := frog if kind == InstrumentKind.FROG else flies
+  var sheet_idx := 0
+  while sheet_idx < sheets.size() - 1 && !sheets[sheet_idx].bars.has(player.current_bar):
+    sheet_idx += 1
+  var sheet := sheets[sheet_idx]
+  
+  var note := pick_note(sheet.scores)
+  while note == last_note:
+    note = pick_note(sheet.scores)
+  last_note = note
+  
+  instrument.play_note(note, 4)
+
+func on_play_fly():
+  play_note(InstrumentKind.FLY)

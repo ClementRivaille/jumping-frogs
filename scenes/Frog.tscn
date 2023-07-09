@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuxjo"]
 size = Vector2(61, 30)
 
-[node name="Frog" type="RigidBody2D"]
+[node name="Frog" type="RigidBody2D" groups=["frog"]]
 collision_layer = 2
 max_contacts_reported = 1
 contact_monitor = true

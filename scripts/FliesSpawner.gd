@@ -11,6 +11,8 @@ var flies_count = 0
 @onready var timer: Timer = $Timer
 @onready var store: GameStore = Store
 
+signal fly_catched
+
 func _ready() -> void:
   store.game_started.connect(activate)
   store.game_over.connect(deactivate)
@@ -30,6 +32,7 @@ func _on_timer_timeout() -> void:
 func on_fly_catched(fly: Fly):
   flies_count = maxi(0, flies_count - 1)
   fly.queue_free()
+  fly_catched.emit()
 
 func activate():
   spawn_fly()

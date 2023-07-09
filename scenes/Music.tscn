@@ -1,8 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://jisv04je2hpd"]
+[gd_scene load_steps=63 format=3 uid="uid://jisv04je2hpd"]
 
 [ext_resource type="Script" path="res://addons/meta_player/meta_player.gd" id="1_5ujk8"]
 [ext_resource type="Script" path="res://scripts/Music.gd" id="1_wo6kl"]
 [ext_resource type="AudioStream" uid="uid://b062y2qx85141" path="res://music/piano.ogg" id="2_k0gcc"]
+[ext_resource type="Script" path="res://scripts/MusicSheet.gd" id="2_ve1te"]
 [ext_resource type="Script" path="res://addons/meta_player/range_fade.gd" id="3_slmuh"]
 [ext_resource type="AudioStream" uid="uid://cj8yqu6fadr3p" path="res://music/drums.ogg" id="4_y1iu5"]
 [ext_resource type="AudioStream" uid="uid://dgmmmsbtkvnlm" path="res://music/bells.ogg" id="6_rub2i"]
@@ -24,6 +25,25 @@
 [ext_resource type="AudioStream" uid="uid://b4uir1kfncpki" path="res://sound/accordion/Accordion127_g1.wav" id="21_x8h1u"]
 [ext_resource type="AudioStream" uid="uid://fgif6mlei4mj" path="res://sound/accordion/Accordion127_g2.wav" id="22_vdwl5"]
 [ext_resource type="AudioStream" uid="uid://diet2il38sajp" path="res://sound/accordion/Accordion127_g3.wav" id="23_7gxxk"]
+[ext_resource type="AudioStream" uid="uid://bw1cst1kajyg3" path="res://sound/frog/c4.ogg" id="25_eqrea"]
+[ext_resource type="AudioStream" uid="uid://cd2rio5dtwq8r" path="res://sound/frog/c5.ogg" id="26_q7886"]
+[ext_resource type="AudioStream" uid="uid://da0okckl0hb7n" path="res://sound/frog/e4.ogg" id="27_v1k5f"]
+[ext_resource type="AudioStream" uid="uid://cjtxrk2jlntuv" path="res://sound/frog/g4.ogg" id="28_6hf6b"]
+[ext_resource type="AudioStream" uid="uid://hspq7ev2slxb" path="res://sound/flies/b5.ogg" id="29_p25e2"]
+[ext_resource type="AudioStream" uid="uid://c8j3wqvq4nck" path="res://sound/flies/c5.ogg" id="30_ppr27"]
+[ext_resource type="AudioStream" uid="uid://xyqacyqnxlux" path="res://sound/flies/e5.ogg" id="31_wa1y6"]
+[ext_resource type="AudioStream" uid="uid://bn7fvq8qkmgu2" path="res://sound/flies/g5.ogg" id="32_eahrk"]
+[ext_resource type="AudioStream" uid="uid://1v7ece54mkck" path="res://sound/fail.ogg" id="34_8tcwn"]
+
+[sub_resource type="Resource" id="Resource_s1f68"]
+script = ExtResource("2_ve1te")
+scores = Array[int]([1, 3, 3, 3, 2, 2])
+bars = Array[int]([1, 2, 3, 8])
+
+[sub_resource type="Resource" id="Resource_yyhce"]
+script = ExtResource("2_ve1te")
+scores = Array[int]([3, 3, 1, 2, 2, 1])
+bars = Array[int]([4, 5, 6, 7])
 
 [sub_resource type="Resource" id="Resource_vpcqp"]
 script = ExtResource("3_slmuh")
@@ -147,12 +167,70 @@ tone = "G"
 octave = 3
 velocity = 5
 
+[sub_resource type="Resource" id="Resource_27l1n"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("25_eqrea")
+tone = "C"
+octave = 4
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_4mvyw"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("26_q7886")
+tone = "C"
+octave = 5
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_160gt"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("27_v1k5f")
+tone = "E"
+octave = 4
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_gmr6d"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("28_6hf6b")
+tone = "G"
+octave = 4
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_erblv"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("29_p25e2")
+tone = "B"
+octave = 4
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_adu86"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("30_ppr27")
+tone = "C"
+octave = 4
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_htoaw"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("31_wa1y6")
+tone = "E"
+octave = 4
+velocity = 5
+
+[sub_resource type="Resource" id="Resource_p552x"]
+script = ExtResource("9_kgpvw")
+stream = ExtResource("32_eahrk")
+tone = "G"
+octave = 4
+velocity = 5
+
 [node name="Music" type="Node2D"]
 script = ExtResource("1_wo6kl")
 scale_notes = Array[String](["A", "B", "D", "E", "F#", "G"])
+sheets = Array[ExtResource("2_ve1te")]([SubResource("Resource_s1f68"), SubResource("Resource_yyhce")])
 
 [node name="MetaPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_k0gcc")
+bus = &"Music"
 script = ExtResource("1_5ujk8")
 tempo = 80
 beats_per_bar = 3
@@ -160,44 +238,49 @@ bars = 8
 
 [node name="layer1" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
 stream = ExtResource("4_y1iu5")
+bus = &"Music"
 script = ExtResource("1_5ujk8")
 automate_volume = true
 target = NodePath("../..")
 target_param = "layer"
-param_smooth = 0.1
+param_smooth = 0.0
 automation_rule = SubResource("Resource_vpcqp")
-seek_up_weight = 0.1
-seek_down_weight = 0.3
+seek_up_weight = 1.8
+seek_down_weight = 0.6
+metadata/debug = true
 
 [node name="layer2" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
 stream = ExtResource("6_rub2i")
+bus = &"Music"
 script = ExtResource("1_5ujk8")
 automate_volume = true
 target = NodePath("../..")
 target_param = "layer"
-param_smooth = 0.1
+param_smooth = 0.0
 automation_rule = SubResource("Resource_svxe7")
 seek_up_weight = 0.1
 seek_down_weight = 0.3
 
 [node name="layer3" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
 stream = ExtResource("7_j5i2i")
+bus = &"Music"
 script = ExtResource("1_5ujk8")
 automate_volume = true
 target = NodePath("../..")
 target_param = "layer"
-param_smooth = 0.1
+param_smooth = 0.0
 automation_rule = SubResource("Resource_0lplv")
 seek_up_weight = 0.1
 seek_down_weight = 0.3
 
 [node name="layer4" type="AudioStreamPlayer" parent="MetaPlayer" node_paths=PackedStringArray("target")]
 stream = ExtResource("8_mtgcg")
+bus = &"Music"
 script = ExtResource("1_5ujk8")
 automate_volume = true
 target = NodePath("../..")
 target_param = "layer"
-param_smooth = 0.1
+param_smooth = 0.0
 automation_rule = SubResource("Resource_5etd1")
 seek_up_weight = 0.1
 seek_down_weight = 0.3
@@ -210,3 +293,21 @@ max_notes = 2
 samples = Array[ExtResource("9_kgpvw")]([SubResource("Resource_6k6yr"), SubResource("Resource_qj28j"), SubResource("Resource_gisok"), SubResource("Resource_pupq1"), SubResource("Resource_tl1lk"), SubResource("Resource_k7wff"), SubResource("Resource_6s58s"), SubResource("Resource_oxrty"), SubResource("Resource_glcgw"), SubResource("Resource_py6m8"), SubResource("Resource_0icju"), SubResource("Resource_0yy3i"), SubResource("Resource_t3dip"), SubResource("Resource_x6pvo")])
 env_sustain = 0.06
 env_release = 0.01
+
+[node name="Frog" type="AudioStreamPlayer" parent="."]
+volume_db = 8.0
+bus = &"Instruments"
+script = ExtResource("8_e4pfa")
+samples = Array[ExtResource("9_kgpvw")]([SubResource("Resource_27l1n"), SubResource("Resource_4mvyw"), SubResource("Resource_160gt"), SubResource("Resource_gmr6d")])
+
+[node name="Fly" type="AudioStreamPlayer" parent="."]
+volume_db = 6.0
+script = ExtResource("8_e4pfa")
+samples = Array[ExtResource("9_kgpvw")]([SubResource("Resource_erblv"), SubResource("Resource_adu86"), SubResource("Resource_htoaw"), SubResource("Resource_p552x")])
+
+[node name="WinSFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
+[node name="FailSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("34_8tcwn")
+bus = &"SFX"

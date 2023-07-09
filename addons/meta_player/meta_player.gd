@@ -40,7 +40,7 @@ class_name meta_player
 @export var automate_volume := false ## Toggle on to enable the volume modulation feature. Ensure the other options are filled out correctly before running, including adding an automation rule.
 @export var target : Node ## The node containing the parameter to monitor for changes.
 @export var target_param := "" ## The name of the Float parameter to monitor.
-@export_range(0.1,1.0) var param_smooth := 0.5 ## The smoothing to apply to parameter changes. 1.0 updates instantly.
+@export_range(0,1.0) var param_smooth := 0.5 ## The smoothing to apply to parameter changes. 1.0 updates instantly.
 @export var automation_rule : fade_rule ## Choose how to automate the volume. A `point_fade` will fade the volume in based on the parameter's absolute distance from a point. A `range_fade` will fade the volume in (or out) based on its relative progress from a minumum to maximum value.
 @export_range(0.1,3.0) var seek_up_weight := 0.8 ## How quickly the volume should rise, in decibels per frame.
 @export_range(0.1,3.0) var seek_down_weight := 0.8 ## How quickly the volume should fall, in decibels per frame.
@@ -148,8 +148,8 @@ func get_range_vol() -> float:
     vol *= -1
     vol += val_max
   vol /= float(abs(val_max - val_min))
-  vol = (vol*70) - 70
-  vol = clamp(vol,-70,0)
+  vol = (vol*50) - 50
+  vol = clamp(vol,-50,0)
   return vol
 
 func get_dis_vol() -> float:
