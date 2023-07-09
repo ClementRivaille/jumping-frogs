@@ -14,11 +14,16 @@ enum InstrumentKind {
 @export var min_octave := 0
 @export var max_octave := 3
 
+@export var win_sounds: Array[AudioStream] = []
+
 @onready var player: meta_player = $MetaPlayer
 @onready var accordion: SamplerInstrument = $Accordion
 @onready var frog: SamplerInstrument = $Frog
 @onready var flies: SamplerInstrument = $Fly
 @onready var store: GameStore = Store
+
+@onready var win_sfx: AudioStreamPlayer = $WinSFX
+@onready var fail_sfx: AudioStreamPlayer = $FailSFX
 
 var layer := 0
 var playing := false
@@ -31,6 +36,8 @@ func _ready() -> void:
   store.game_started.connect(start)
   store.level_updated.connect(update_layer)
   store.game_over.connect(on_game_over)
+  store.level_up.connect(play_success)
+  store.level_down.connect(play_fail)
   player.beat.connect(_on_beat)
   player.mplay()
   
@@ -105,3 +112,14 @@ func play_note(kind: InstrumentKind):
 
 func on_play_fly():
   play_note(InstrumentKind.FLY)
+
+func play_success():
+  var sound: AudioStream = win_sounds.pick_random()
+  win_sfx.stream = sound
+  await beat
+  win_sfx.play()
+  
+func play_fail():
+  if !fail_sfx.playing:
+    fail_sfx.play()
+  

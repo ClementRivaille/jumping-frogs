@@ -1,10 +1,12 @@
-[gd_scene load_steps=63 format=3 uid="uid://jisv04je2hpd"]
+[gd_scene load_steps=65 format=3 uid="uid://jisv04je2hpd"]
 
 [ext_resource type="Script" path="res://addons/meta_player/meta_player.gd" id="1_5ujk8"]
 [ext_resource type="Script" path="res://scripts/Music.gd" id="1_wo6kl"]
 [ext_resource type="AudioStream" uid="uid://b062y2qx85141" path="res://music/piano.ogg" id="2_k0gcc"]
 [ext_resource type="Script" path="res://scripts/MusicSheet.gd" id="2_ve1te"]
+[ext_resource type="AudioStream" uid="uid://kdci2a2judmi" path="res://sound/victory1.ogg" id="3_ikt1i"]
 [ext_resource type="Script" path="res://addons/meta_player/range_fade.gd" id="3_slmuh"]
+[ext_resource type="AudioStream" uid="uid://ujyu415r3ua6" path="res://sound/victory2.ogg" id="4_1761f"]
 [ext_resource type="AudioStream" uid="uid://cj8yqu6fadr3p" path="res://music/drums.ogg" id="4_y1iu5"]
 [ext_resource type="AudioStream" uid="uid://dgmmmsbtkvnlm" path="res://music/bells.ogg" id="6_rub2i"]
 [ext_resource type="AudioStream" uid="uid://cmpfnoter318p" path="res://music/melody.ogg" id="7_j5i2i"]
@@ -227,6 +229,7 @@ velocity = 5
 script = ExtResource("1_wo6kl")
 scale_notes = Array[String](["A", "B", "D", "E", "F#", "G"])
 sheets = Array[ExtResource("2_ve1te")]([SubResource("Resource_s1f68"), SubResource("Resource_yyhce")])
+win_sounds = Array[AudioStream]([ExtResource("3_ikt1i"), ExtResource("4_1761f")])
 
 [node name="MetaPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_k0gcc")
@@ -306,6 +309,7 @@ script = ExtResource("8_e4pfa")
 samples = Array[ExtResource("9_kgpvw")]([SubResource("Resource_erblv"), SubResource("Resource_adu86"), SubResource("Resource_htoaw"), SubResource("Resource_p552x")])
 
 [node name="WinSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -3.0
 bus = &"SFX"
 
 [node name="FailSFX" type="AudioStreamPlayer" parent="."]

@@ -36,13 +36,12 @@ func level_success():
 
 func level_fail():
   level = level - 1
+  level_down.emit()
+  level_updated.emit(level)
   if level < 0:
     game_running = false
     game_over.emit()
     level = 0
-  else:
-    level_updated.emit(level)
-  level_down.emit()
     
 func start_game():
   game_running = true
