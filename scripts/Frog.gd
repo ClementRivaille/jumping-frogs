@@ -19,7 +19,11 @@ var reset_position_to := -1.0
 var in_air := true
 var scheduled_jump_on := -1
 
+var mouse_inside := false
+
 signal jumped
+signal mouse_hover
+signal mouse_exit
 
 func _ready() -> void:
   sprite.sprite_frames = frames
@@ -39,13 +43,19 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 func _process(_delta: float) -> void:
   if in_air:
     sprite.flip_h = linear_velocity.x < 0.0
+    
+func _input(event: InputEvent) -> void:
+  if event is InputEventMouseButton && event.is_pressed() && mouse_inside:
+    if store.finished && !in_air:
+      jump(true)
+      mouse_exit.emit()
 
-func jump():
+func jump(vertical := false):
   joint.node_b = "."
   var facetious = randi()%3 > 1
   var direction := -1.0 if randf() > 0.5 else 1.0
   var hforce := direction * MAX_HFORCE * randf_range(0.8, 1.0) if facetious else randf_range(-MAX_HFORCE, MAX_HFORCE)
-  apply_central_impulse(Vector2(hforce, -VFORCE))
+  apply_central_impulse(Vector2(0.0 if vertical else hforce, -VFORCE))
   sprite.animation = "jump"
   in_air = true
   jumped.emit()
@@ -89,3 +99,14 @@ func free_jump_beat():
   if scheduled_jump_on != -1:
     store.return_beat(scheduled_jump_on)
     scheduled_jump_on = -1
+
+func _on_mouse_entered() -> void:
+  mouse_inside = true
+  if store.finished && !in_air:
+    mouse_hover.emit()
+
+
+func _on_mouse_exited() -> void:
+  mouse_inside = false
+  if store.finished && !in_air:
+    mouse_exit.emit()

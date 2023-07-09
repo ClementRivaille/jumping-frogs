@@ -25,7 +25,7 @@ func _ready() -> void:
   store.complete.connect(deactivate)
 
 func _input(event: InputEvent) -> void:
-  if event is InputEventMouseButton && store.game_running:
+  if event is InputEventMouseButton && store.game_running && !store.finished:
     if event.is_pressed() && mouse_inside:
       dragged = true
       pos_diff = get_viewport().get_mouse_position().x - global_position.x
@@ -54,11 +54,11 @@ func _process(_delta: float) -> void:
 
 func _on_mouse_entered() -> void:
   mouse_inside = true
-  if store.game_running && !dragged:
+  if store.game_running && !store.finished && !dragged:
     drag_hover.emit()
 func _on_mouse_exited() -> void:
   mouse_inside = false
-  if store.game_running && !dragged:
+  if store.game_running && !store.finished && !dragged:
     drag_exit.emit()
 
 func set_steps(nb: int):

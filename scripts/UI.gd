@@ -35,6 +35,12 @@ func _ready() -> void:
     platform.drag_hover.connect(set_cursor_drag)
     platform.drag_on.connect(set_cursor_drop)
     platform.drag_exit.connect(set_cursor_default)
+    
+  var frogs := get_tree().get_nodes_in_group("frog")
+  for f in frogs:
+    var frog: Frog = f
+    frog.mouse_hover.connect(set_cursor_drag)
+    frog.mouse_exit.connect(set_cursor_default)
 
 func _input(event: InputEvent) -> void:
   if !store.game_running && event is InputEventMouseButton && event.is_pressed():

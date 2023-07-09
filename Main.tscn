@@ -81,7 +81,8 @@ script = ExtResource("4_jfj8j")
 cursor_default = ExtResource("6_oyutr")
 cursor_drag = ExtResource("6_ehbfo")
 cursor_drop = ExtResource("7_qrhb3")
-end_text = "Thank you for playing!"
+end_text = "Thank you for playing!
+You can pet the frogs now"
 game_over_text = "Click to try again"
 tutorial_text = "Drag the lily pads
 with left click"

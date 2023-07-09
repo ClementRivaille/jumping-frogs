@@ -8,6 +8,7 @@ size = Vector2(61, 30)
 
 [node name="Frog" type="RigidBody2D" groups=["frog"]]
 collision_layer = 2
+input_pickable = true
 max_contacts_reported = 1
 contact_monitor = true
 lock_rotation = true
@@ -31,3 +32,5 @@ sprite_frames = ExtResource("2_ggf6p")
 animation = &"jump"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
