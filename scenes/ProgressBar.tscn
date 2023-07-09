@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://bididdt3lg84j"]
+
+[ext_resource type="Script" path="res://scripts/ProgressBar.gd" id="1_jix8q"]
+[ext_resource type="Texture2D" uid="uid://cyjpx3hiw2ls2" path="res://sprites/UI/Progress Bar/progress-bar-bg.png" id="1_qgxqk"]
+[ext_resource type="Texture2D" uid="uid://b0uf4ht8red6e" path="res://sprites/UI/Progress Bar/progress-bar-fill.png" id="2_7y12g"]
+[ext_resource type="Texture2D" uid="uid://ss5x156ycdna" path="res://sprites/UI/Progress Bar/progress-bar-overlay-border.png" id="3_8s427"]
+
+[node name="ProgressBar" type="Control"]
+layout_mode = 3
+anchor_left = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.135
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jix8q")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 460.0
+offset_bottom = 88.0
+texture = ExtResource("1_qgxqk")
+expand_mode = 2
+
+[node name="Inside" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 23.09
+offset_top = 19.435
+offset_right = 435.445
+offset_bottom = 65.135
+
+[node name="Filler" type="Control" parent="Inside"]
+clip_contents = true
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inside/Filler"]
+layout_mode = 0
+offset_right = 412.355
+offset_bottom = 45.7
+texture = ExtResource("2_7y12g")
+expand_mode = 2
+
+[node name="Foreground" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 455.0
+offset_bottom = 87.0
+texture = ExtResource("3_8s427")
+expand_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true

@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://er6dpfspguc0"]
+[gd_scene load_steps=22 format=3 uid="uid://er6dpfspguc0"]
 
 [ext_resource type="PackedScene" uid="uid://cw64bi4h4q7br" path="res://scenes/Frog.tscn" id="1_dn6oc"]
-[ext_resource type="Texture2D" uid="uid://5c0l532o3sgv" path="res://sprites/4K-textured-bg.jpg" id="1_jsexm"]
+[ext_resource type="Texture2D" uid="uid://bsn0akm3tblnq" path="res://sprites/4K-textured-bg-with-reeds.jpg" id="1_ysant"]
 [ext_resource type="PackedScene" uid="uid://crje4f4x3w0f0" path="res://scenes/Platform.tscn" id="2_gr0qy"]
 [ext_resource type="Script" path="res://scripts/FliesSpawner.gd" id="3_4bvrc"]
 [ext_resource type="PackedScene" uid="uid://d3uan07s2wxat" path="res://scenes/Fly.tscn" id="3_gyo8n"]
@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cxixhtcni44xm" path="res://sprites/Cursor/cursor-closed-hand.png" id="7_qrhb3"]
 [ext_resource type="PackedScene" uid="uid://jisv04je2hpd" path="res://scenes/Music.tscn" id="9_ylqg5"]
 [ext_resource type="SpriteFrames" uid="uid://c7dmk7itbm2d6" path="res://sprites/Frogs/Frog_light.tres" id="10_b7bll"]
+[ext_resource type="Texture2D" uid="uid://xt8bybwq5n" path="res://sprites/UI/border.png" id="11_ml8gu"]
 [ext_resource type="SpriteFrames" uid="uid://rf2yipwu4htq" path="res://sprites/Frogs/Frog_forest.tres" id="11_p2gu2"]
+[ext_resource type="PackedScene" uid="uid://bididdt3lg84j" path="res://scenes/ProgressBar.tscn" id="11_px4ef"]
 [ext_resource type="SpriteFrames" uid="uid://brsyp0p1k7yai" path="res://sprites/Frogs/Frog_brown.tres" id="12_wc38j"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4owon"]
@@ -30,9 +32,9 @@ size = Vector2(1163, 20)
 
 [node name="Main" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(0.300926, 0.300926)
-texture = ExtResource("1_jsexm")
+texture = ExtResource("1_ysant")
 centered = false
 
 [node name="Platform" parent="." instance=ExtResource("2_gr0qy")]
@@ -78,6 +80,21 @@ cursor_drag = ExtResource("6_ehbfo")
 cursor_drop = ExtResource("7_qrhb3")
 
 [node name="Start" parent="UI" instance=ExtResource("5_o8sl8")]
+
+[node name="Frame" type="TextureRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_ml8gu")
+expand_mode = 2
+
+[node name="ProgressBar" parent="UI" instance=ExtResource("11_px4ef")]
+anchor_left = 0.309
+anchor_top = 0.038
+anchor_right = 0.715
+anchor_bottom = 0.148
 
 [node name="Debug" parent="UI" instance=ExtResource("4_lix75")]
 visible = false

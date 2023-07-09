@@ -29,12 +29,11 @@ func level_success():
   level += 1
   level_updated.emit(level)
   score = 0
+  level_up.emit()
   score_updated.emit(score)
   if level >= max_level:
     finished = true
     complete.emit()
-  else:
-    level_up.emit()
 
 func level_fail():
   level = level - 1

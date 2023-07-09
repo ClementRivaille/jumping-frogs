@@ -18,6 +18,9 @@ func _ready() -> void:
   store.game_started.connect(spawn_frog)
 
 func spawn_frog():
+  if store.finished:
+    return
+
   var available_frogs = frogs.filter(func (frog: Frog): return frog.freeze)
   if available_frogs.size() == 0:
     return
