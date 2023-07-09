@@ -9,6 +9,8 @@ var score = 0
 var game_running = false
 var finished = false
 
+var beats_available := [1,2,3]
+
 signal score_updated(value: int)
 signal level_updated(value: int)
 signal level_up
@@ -46,3 +48,12 @@ func level_fail():
 func start_game():
   game_running = true
   game_started.emit()
+
+func schedule_beat(beat: int) -> int:
+  if beats_available.has(beat):
+    beats_available.erase(beat)
+    return beat
+  return -1
+  
+func return_beat(beat: int):
+  beats_available.append(beat)

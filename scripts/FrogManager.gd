@@ -32,5 +32,5 @@ func spawn_frog():
 func on_frog_fall(frog: Frog):
   if !store.game_running:
     return
-  frog.set_deferred("freeze", true)
+  frog.exit_game()
   store.level_fail()

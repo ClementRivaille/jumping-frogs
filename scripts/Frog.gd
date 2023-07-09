@@ -7,8 +7,8 @@ class_name Frog
 
 var beats_scores: Array[Array] = [
   [1],
-  [1,1,2,3,-1,-1],
-  [1,2,3,-1,-1]
+  [1,1,2,3],
+  [1,2,3]
 ]
 
 @onready var joint: PinJoint2D = $PinJoint2D
@@ -17,7 +17,7 @@ var beats_scores: Array[Array] = [
 
 var reset_position_to := -1.0
 var in_air := true
-var scheduled_jump_on := 1
+var scheduled_jump_on := -1
 
 signal jumped
 
@@ -60,13 +60,24 @@ func enter_game(xpos: float):
   set_deferred("freeze", false)
   reset_position_to = xpos
   
+func exit_game():
+  set_deferred("freeze", true)
+  if scheduled_jump_on != -1:
+    store.return_beat(scheduled_jump_on)
+    scheduled_jump_on = -1
+  
 func schedule_jump():
+  if scheduled_jump_on != -1:
+    return
   var scores: Array = beats_scores[mini(store.level, beats_scores.size() - 1)]
-  scheduled_jump_on = scores.pick_random()
+  var planned_jump: int = scores.pick_random()
+  scheduled_jump_on = store.schedule_beat(planned_jump)
   
 func on_beat(beat: int):
   if !freeze && !in_air:
     if beat == scheduled_jump_on:
+      store.return_beat(scheduled_jump_on)
+      scheduled_jump_on = -1
       jump()
     elif beat == 1 && scheduled_jump_on == -1:
       schedule_jump()
